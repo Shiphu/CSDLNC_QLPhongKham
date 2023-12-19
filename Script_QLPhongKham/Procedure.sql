@@ -54,7 +54,7 @@ create or alter proc sp_ThemCuocHenYeuCau
 					@tinhtrangbenh nvarchar(100), @thoigianYC date, @manvql int 
 as
 
-begin tran
+begin
 	-- Kiểm tra bệnh nhân mới hay cũ
 	if not exists (select * from BENHNHAN where HoTenBN = @hoten and @ngsinh = NgSinhBN)
 	begin
@@ -72,18 +72,17 @@ begin tran
 
 	if @@ERROR <>0
 	begin
-		rollback tran
-		return 0
+		return 
 	end
-	return 1
-commit tran
+	return
+end
 
 go
 
 -- QUẢN TRỊ VIÊN: Thêm loại thuốc mới
 create or alter proc sp_ThemThuocMoi @tenthuoc nvarchar(100), @donvi nvarchar(10), @chongchidinh nvarchar(100), @ngayhethan date
 as
-begin tran
+begin
     if exists (
         select *
         from THUOC
@@ -91,30 +90,29 @@ begin tran
     )
     begin
         print N'Thuốc đã tồn tại'
-        return 0 
+        return 
     end
     else 
         begin 
             if (DATEDIFF(DAY, @ngayhethan, GETDATE()) > 0)
             begin
                 print N'Ngày hết hạn không phù hợp'
-				rollback tran
-                return 0
+                return
             end
             else 
             begin
                 insert into THUOC(TenThuoc, DonVi, ChongChiDinh, NgayHetHan, MaQTV, SLTK) values (@tenthuoc, @donvi, @chongchidinh, @ngayhethan, 1, 0)
                 print N'Thêm thuốc thành công'
             end
-			return 1
+			return
         end
-commit tran
+end
 go
 
 -- QUẢN TRỊ VIÊN: Cập nhật số lượng tồn kho của thuốc
 create or alter proc sp_CapNhatSLTK @mathuoc int, @soluong int
 as
-begin tran
+begin
     if not exists (
         select* 
         from THUOC
@@ -122,8 +120,7 @@ begin tran
     )
     begin 
         print N'Thuốc không tồn tại'
-		rollback tran
-		return 0
+		return
     end
     else 
     begin
@@ -132,9 +129,9 @@ begin tran
         set @sltk = @sltk + @soluong
         update THUOC set SLTK = @sltk where @mathuoc = MaThuoc
         print N'Cập nhật số lượng tồn kho thành công'
-		return 1
+		return
     end
-commit tran
+end
 go
 
 
@@ -148,14 +145,12 @@ CREATE OR ALTER PROC sp_ThemTaiKhoan
     @mavt VARCHAR(10)
 AS
 BEGIN
-    BEGIN TRANSACTION;
     DECLARE @existedAccount INT
     IF EXISTS ( SELECT MaTaiKhoan FROM TAIKHOAN WHERE TenDangNhap = @tendangnhap )
-        BEGIN
-            ROLLBACK TRANSACTION;
-            RAISERROR(N'Tài khoản đã tồn tại trong hệ thống', 16, 1);
-            RETURN;
-        END
+    BEGIN
+        PRINT N'Tài khoản đã tồn tại trong hệ thống';
+        RETURN;
+    END
     INSERT INTO TAIKHOAN(TenDangNhap, MatKhau, MaVT, TinhTrang, MaQTV) 
     VALUES (@tendangnhap, @matkhau, @mavt, 'enable', 1)
     SELECT @existedAccount = SCOPE_IDENTITY() --hàm có sẵn, trả về identity của table vừa Insert vào
@@ -169,21 +164,18 @@ BEGIN
         INSERT INTO NHANVIEN(MaNhanVien, HoTenNV, NgSinhNV, DiaChiNV, DienThoaiNV) 
         VALUES (@existedAccount, @hoten, @ngsinh, @diachi, @tendangnhap)
     END
-        ELSE
-            BEGIN
-                PRINT N'Không tồn tại vai trò này'
-                ROLLBACK TRANSACTION;
-                RETURN;
-            END
+    ELSE
+    BEGIN
+        PRINT N'Không tồn tại vai trò này'
+        RETURN;
+    END
     IF @@ERROR <> 0
     BEGIN
-        ROLLBACK TRANSACTION;
         RETURN;
     END
     ELSE
     BEGIN
         PRINT N'Thêm tài khoản thành công!!!'
-        COMMIT TRANSACTION;
         RETURN;
     END
 END
@@ -193,13 +185,6 @@ END
 
 
 
-exec sp_ThemCuocHenYeuCau N'Phạm Sĩ Phú', '03/21/2003', null, '0908292756', null, N'Nam', N'ê buốt răng sữa', '8/15/2024', 68
 
-
-select * from BENHNHAN
-
-select * from CH_YEUCAU
-
-select * from NHANVIEN
 
 
