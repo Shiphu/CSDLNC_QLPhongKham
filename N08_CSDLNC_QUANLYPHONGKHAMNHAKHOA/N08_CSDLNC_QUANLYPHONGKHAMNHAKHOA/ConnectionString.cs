@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
 {
     class ConnectionString

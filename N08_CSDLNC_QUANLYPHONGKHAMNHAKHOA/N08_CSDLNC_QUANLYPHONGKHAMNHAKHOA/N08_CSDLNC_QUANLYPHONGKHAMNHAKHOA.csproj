@@ -125,6 +125,12 @@
     <EmbeddedResource Include="HOME.resx">
       <DependentUpon>HOME.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NHANVIEN.resx">
+      <DependentUpon>NHANVIEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NHASI.resx">
+      <DependentUpon>NHASI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QUANTRIVIEN.resx">
       <DependentUpon>QUANTRIVIEN.cs</DependentUpon>
     </EmbeddedResource>

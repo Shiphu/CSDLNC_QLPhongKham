@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using WinFormsApp1;
 
 namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
 {

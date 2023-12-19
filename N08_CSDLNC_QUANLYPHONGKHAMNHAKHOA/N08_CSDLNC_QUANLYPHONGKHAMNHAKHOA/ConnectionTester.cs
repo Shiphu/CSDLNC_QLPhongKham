@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinFormsApp1
+namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
 {
     public class ConnectionTester
     {
