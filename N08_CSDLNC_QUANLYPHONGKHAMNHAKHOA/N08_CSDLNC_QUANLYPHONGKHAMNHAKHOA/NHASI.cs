@@ -20,16 +20,9 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
         ConnectionTester conn = new ConnectionTester();
         private int numConn = -1;
         private bool isNumConnInitialized = false;
-<<<<<<< Updated upstream
         private string username;
         private string password;
-
-=======
-
-        public string username { get; set; }
         public string MaNhaSi { get; set; }
->>>>>>> Stashed changes
-
         public NHASI()
         {
             InitializeComponent();
@@ -39,9 +32,7 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
         {
             InitializeComponent();
             this.username = username;
-<<<<<<< Updated upstream
             this.password = password;
-=======
             this.MaNhaSi = GetMaNhaSiFromDatabase(username);
         }
 
@@ -75,7 +66,6 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
                 }
             }
             return maNhaSi;
->>>>>>> Stashed changes
         }
 
         private int GetNumConn()
@@ -168,9 +158,8 @@ WHERE
         }
         private void NHASI_Load(object sender, EventArgs e)
         {
-            LoadDataToTextBoxes();
-            dgv_HSBN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv_HSBN.Columns.Clear();
+            LoadDataToTextBoxes(); // Call a method to load data to TextBoxes if needed
+            dgv_HSBN.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgv_HSBN.DataSource = LoadData_HSBN().Tables[0];
         }
 
