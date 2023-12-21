@@ -105,31 +105,31 @@ END
 go
 
 
--- QUANTRIVIEN: Thống kê lịch hẹn yêu cầu theo NGÀY (trong khoảng thời gian từ NgàyBD đến NgàyKT trong cùng 1 tháng)
-create or alter proc sp_ThongKeLichHenYeuCauTheoNgay @NgayBD datetime, @NgayKT datetime
+-- QUANTRIVIEN: Thống kê các kế hoạch điều trị trong NGÀY theo từng NHA SĨ (trong khoảng thời gian từ NgàyBD đến NgàyKT trong cùng 1 tháng)
+create or alter proc sp_ThongKeKeHoachDieuTriTrongNgayTheoTungNhaSi @NgayThongKe datetime
 as
 	begin
-		select DATEPART(day, ThoiGianYC) as N'Ngày', COUNT(*) as N'Số lượng cuộc hẹn yêu cầu'
-		from CH_YEUCAU
-		where ThoiGianYC between @NgayBD and @NgayKT
-		group by DATEPART(day, ThoiGianYC)
-		order by DATEPART(day, ThoiGianYC)
+		select MaNhaSi as N'Mã nha sĩ', COUNT(*) as N'Số điều trị'
+		from KEHOACHDIEUTRI
+		where cast(NgayDieuTri as date) = cast(@NgayThongKe as date)
+		group by MaNhaSi
+		order by MaNhaSi
 	end
 go
 
--- QUANTRIVIEN: Thống kê lịch hẹn yêu cầu theo THÁNG (trong khoảng thời gian từ NgàyBD đến NgàyKT trong cùng 1 năm)
-create or alter proc sp_ThongKeLichHenYeuCauTheoThang @NgayBD datetime, @NgayKT datetime
+create or alter proc sp_ThongKeKeHoachDieuTriTheoNgay @NgayBD datetime, @NgayKT datetime
 as
 	begin
-		select DATEPART(month, ThoiGianYC) as N'Tháng', COUNT(*) as N'Số lượng cuộc hẹn yêu cầu'
-		from CH_YEUCAU
-		where ThoiGianYC between @NgayBD and @NgayKT
-		group by DATEPART(month, ThoiGianYC)
-		order by DATEPART(month, ThoiGianYC)
+		select DATEPART(day, NgayGioHen) as N'Ngày', count(*) as N'Số điều trị'
+		from KEHOACHDIEUTRI
+		where NgayDieuTri between @NgayBD and @NgayKT
+		GROUP BY DATEPART(day, NgayDieuTri)
+		ORDER BY DATEPART(day, NgayDieuTri)
 	end
 go
 
--- QUANTRIVIEN: Thống kê lịch hẹn khám trong ngày theo từng NHA SĨ (trong một ngày được chỉ định)
+
+-- QUANTRIVIEN: Thống kê lịch hẹn khám trong NGÀY theo từng NHA SĨ (trong một ngày được chỉ định)
 create or alter proc sp_ThongKeLichHenKhamTrongNgayTheoTungNhaSi @NgayThongKe datetime
 as
 	begin
@@ -150,6 +150,54 @@ as
 		where NgayGioHen between @NgayBD and @NgayKT
 		GROUP BY DATEPART(day, NgayGioHen)
 		ORDER BY DATEPART(day, NgayGioHen)
+	end
+go
+
+-- QUANTRIVIEN: Thống kê lịch hẹn khám theo THÁNG (trong khoảng thời gian từ NgàyBD đến NgàyKT trong cùng 1 năm) 
+create or alter proc sp_ThongKeLichHenKhamTheoNgay @NgayBD datetime, @NgayKT datetime
+as
+	begin
+		select DATEPART(month, NgayGioHen) as N'Tháng', count(*) as N'Số lượng lịch hẹn khám'
+		from CUOCHEN CH join CH_BENHNHAN CHBN on CH.MaCuocHen = CHBN.MaCHBN and LoaiCuocHen = N'bệnh nhân'
+		where NgayGioHen between @NgayBD and @NgayKT
+		GROUP BY DATEPART(month, NgayGioHen)
+		ORDER BY DATEPART(month, NgayGioHen) 
+	end
+go
+
+-- QUANTRIVIEN: Thống kê lịch hẹn khám theo NGÀY THÁNG (trong khoảng thời gian từ NgàyBD đến NgàyKT trong cùng 1 năm) 
+create or alter proc sp_ThongKeLichHenKhamTheoNgay @NgayBD datetime, @NgayKT datetime
+as
+	begin
+		select DATEPART(day, NgayGioHen) as N'Ngày', DATEPART(month, NgayGioHen) as N'Tháng', count(*) as N'Số lượng lịch hẹn khám'
+		from CUOCHEN CH join CH_BENHNHAN CHBN on CH.MaCuocHen = CHBN.MaCHBN and LoaiCuocHen = N'bệnh nhân'
+		where NgayGioHen between @NgayBD and @NgayKT
+		GROUP BY DATEPART(month, NgayGioHen), DATEPART(day, NgayGioHen)
+		ORDER BY DATEPART(day, NgayGioHen), DATEPART(month, NgayGioHen) 
+	end
+go
+
+-- QUANTRIVIEN: Thống kê lịch hẹn khám theo NĂM (trong khoảng thời gian từ NgàyBD đến NgàyKT) 
+create or alter proc sp_ThongKeLichHenKhamTheoNgay @NgayBD datetime, @NgayKT datetime
+as
+	begin
+		select DATEPART(year, NgayGioHen) as N'Năm', count(*) as N'Số lượng lịch hẹn khám'
+		from CUOCHEN CH join CH_BENHNHAN CHBN on CH.MaCuocHen = CHBN.MaCHBN and LoaiCuocHen = N'bệnh nhân'
+		where NgayGioHen between @NgayBD and @NgayKT
+		GROUP BY DATEPART(year, NgayGioHen)
+		ORDER BY DATEPART(year, NgayGioHen)
+	end
+go
+
+-- QUANTRIVIEN: Thống kê lịch hẹn khám theo NGÀY THÁNG NĂM (trong khoảng thời gian từ NgàyBD đến NgàyKT) 
+create or alter proc sp_ThongKeLichHenKhamTheoNgay @NgayBD datetime, @NgayKT datetime
+as
+	begin
+		select DATEPART(day, NgayGioHen) as N'Ngày', DATEPART(month, NgayGioHen) as N'Tháng', DATEPART(year, NgayGioHen) as N'Năm', count(*) as N'Số lượng lịch hẹn khám'
+		from CUOCHEN CH join CH_BENHNHAN CHBN on CH.MaCuocHen = CHBN.MaCHBN and LoaiCuocHen = N'bệnh nhân'
+		where NgayGioHen between @NgayBD and @NgayKT
+		GROUP BY DATEPART(year, NgayGioHen), DATEPART(month, NgayGioHen), DATEPART(day, NgayGioHen)
+		ORDER BY DATEPART(day, NgayGioHen), DATEPART(month, NgayGioHen), DATEPART(year, NgayGioHen)
 	end
 go
 
