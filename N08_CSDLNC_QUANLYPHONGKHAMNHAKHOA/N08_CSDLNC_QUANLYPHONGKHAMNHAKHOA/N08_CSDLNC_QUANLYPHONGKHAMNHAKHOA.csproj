@@ -72,6 +72,12 @@
     <Compile Include="EditProfile.Designer.cs">
       <DependentUpon>EditProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoaDon.Designer.cs">
+      <DependentUpon>HoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOME.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,12 @@
     </Compile>
     <Compile Include="NHASI.Designer.cs">
       <DependentUpon>NHASI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NS_THEMTHUOC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NS_THEMTHUOC.Designer.cs">
+      <DependentUpon>NS_THEMTHUOC.cs</DependentUpon>
     </Compile>
     <Compile Include="QUANTRIVIEN.cs">
       <SubType>Form</SubType>
@@ -110,17 +122,59 @@
     <Compile Include="SIGN_UP.Designer.cs">
       <DependentUpon>SIGN_UP.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaoKeHoachDieuTri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaoKeHoachDieuTri.Designer.cs">
+      <DependentUpon>TaoKeHoachDieuTri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaoLichHenBenhNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaoLichHenBenhNhan.Designer.cs">
+      <DependentUpon>TaoLichHenBenhNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemDieuTri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemDieuTri.Designer.cs">
+      <DependentUpon>ThemDieuTri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemLHCN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemLHCN.Designer.cs">
+      <DependentUpon>ThemLHCN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemTaiKhoan.Designer.cs">
+      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThemThuoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ThemThuoc.Designer.cs">
       <DependentUpon>ThemThuoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="TOATHUOC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TOATHUOC.Designer.cs">
+      <DependentUpon>TOATHUOC.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CapNhatSLTK.resx">
       <DependentUpon>CapNhatSLTK.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DATLICHHEN.resx">
       <DependentUpon>DATLICHHEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoaDon.resx">
+      <DependentUpon>HoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOME.resx">
       <DependentUpon>HOME.cs</DependentUpon>
@@ -130,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NHASI.resx">
       <DependentUpon>NHASI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NS_THEMTHUOC.resx">
+      <DependentUpon>NS_THEMTHUOC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QUANTRIVIEN.resx">
       <DependentUpon>QUANTRIVIEN.cs</DependentUpon>
@@ -147,8 +204,26 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TaoKeHoachDieuTri.resx">
+      <DependentUpon>TaoKeHoachDieuTri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaoLichHenBenhNhan.resx">
+      <DependentUpon>TaoLichHenBenhNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemDieuTri.resx">
+      <DependentUpon>ThemDieuTri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemLHCN.resx">
+      <DependentUpon>ThemLHCN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemTaiKhoan.resx">
+      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ThemThuoc.resx">
       <DependentUpon>ThemThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOATHUOC.resx">
+      <DependentUpon>TOATHUOC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -177,6 +252,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dentist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NHANVIEN1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SoRang1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

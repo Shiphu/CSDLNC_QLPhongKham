@@ -44,45 +44,51 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(163, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(94, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 16);
+            this.label1.Size = new System.Drawing.Size(272, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "THÊM THUỐC MỚI";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(31, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 16);
+            this.label2.Size = new System.Drawing.Size(74, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Tên thuốc";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(31, 121);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(50, 18);
             this.label3.TabIndex = 2;
             this.label3.Text = "Đơn vị";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(31, 164);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 16);
+            this.label4.Size = new System.Drawing.Size(106, 18);
             this.label4.TabIndex = 3;
             this.label4.Text = "Chống chỉ định";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(31, 213);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 16);
+            this.label5.Size = new System.Drawing.Size(94, 18);
             this.label5.TabIndex = 4;
             this.label5.Text = "Ngày hết hạn";
             // 
@@ -115,13 +121,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(145, 208);
+            this.dateTimePicker1.Location = new System.Drawing.Point(145, 210);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(247, 22);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(292, 273);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 33);
@@ -132,6 +139,7 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(166, 273);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 33);
@@ -159,6 +167,7 @@
             this.Name = "ThemThuoc";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ThemThuoc";
+            this.Load += new System.EventHandler(this.ThemThuoc_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

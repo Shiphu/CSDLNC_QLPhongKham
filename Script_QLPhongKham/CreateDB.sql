@@ -27,7 +27,7 @@ create table NHASI
 	HoTenNS nvarchar(50),
 	NgSinhNS date,
 	DiaChiNS nvarchar(100),
-	DienThoaiNS varchar(10) not null,
+	DienThoaiNS varchar(10) not null unique,
 	primary key(MaNhaSi)
 )
 
@@ -37,7 +37,7 @@ create table NHANVIEN
 	HoTenNV nvarchar(50),
 	NgSinhNV date,
 	DiaChiNV nvarchar(100),
-	DienThoaiNV varchar(10) not null,
+	DienThoaiNV varchar(10) not null unique,
 	primary key (MaNhanVien)
 )
 
@@ -55,7 +55,7 @@ create table BENHNHAN
 	HoTenBN nvarchar(50),
 	NgSinhBN date,
 	DiaChiBN nvarchar(100),
-	DienThoaiBN varchar(10) not null,
+	DienThoaiBN varchar(10) not null unique,
 	EmailBN varchar(50),
 	GioiTinhBN nvarchar(4) check (GioiTinhBN IN('Nam', N'Nữ'))
 	primary key (MaBenhNhan)

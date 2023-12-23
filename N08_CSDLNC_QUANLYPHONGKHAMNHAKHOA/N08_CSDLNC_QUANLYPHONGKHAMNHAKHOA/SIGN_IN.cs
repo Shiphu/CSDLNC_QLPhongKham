@@ -87,33 +87,97 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
                     loaiVT = Convert.ToInt32(cmd.Parameters["@loaivt"].Value);
                 }
             }
-            if (loaiVT == 0)
-                MessageBox.Show("TÀI KHOẢN KHÔNG TỒN TẠI!!! HÃY THỬ LẠI");
+            if (loaiVT == 0) { }
+            //MessageBox.Show("TÀI KHOẢN KHÔNG TỒN TẠI!!! HÃY THỬ LẠI");
             else if (loaiVT == 1)
             {
-                QUANTRIVIEN qUANTRIVIEN = new QUANTRIVIEN();
+                QUANTRIVIEN qUANTRIVIEN = new QUANTRIVIEN(username, password);
                 this.Hide();
                 qUANTRIVIEN.ShowDialog();
                 this.Close();
             }
             else if (loaiVT == 2)
             {
-                NHASI nHASI = new NHASI(username);
+                NHASI nHASI = new NHASI(username, password);
                 this.Hide();
                 nHASI.ShowDialog();
                 this.Close();
             }
             else if (loaiVT == 3)
             {
-                NHANVIEN nHANVIEN = new NHANVIEN(username);
+                NHANVIEN nHANVIEN = new NHANVIEN(username, password);
                 this.Hide();
                 nHANVIEN.ShowDialog();
                 this.Close();
             }
-            else
-                MessageBox.Show("TÀI KHOẢN ĐANG BỊ KHÓA !!!");
+            //else
+            //    MessageBox.Show("TÀI KHOẢN ĐANG BỊ KHÓA !!!");
 
 
+        }
+
+        private void SIGN_IN_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(SIGNIN_KEYDOWN);
+        }
+
+        private void SIGNIN_KEYDOWN(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string username = textBox1.Text;
+                string password = textBox2.Text;
+                int loaiVT = -2;
+                int nConn = GetNumConn();
+
+                using (SqlConnection connection = new SqlConnection(conn.connectionStrings[nConn]))
+                {
+                    connection.InfoMessage += Connection_InfoMessage; // Đăng ký sự kiện InfoMessage
+                    using (SqlCommand cmd = new SqlCommand("sp_XacThucTaiKhoan", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Thêm các tham số vào stored procedure
+                        cmd.Parameters.AddWithValue("@sdt", username);
+                        cmd.Parameters.AddWithValue("@matkhau", password);
+                        cmd.Parameters.Add("@loaivt", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+
+                        // Lấy giá trị trả về từ biến @loaivt sau khi thực thi stored procedure
+                        loaiVT = Convert.ToInt32(cmd.Parameters["@loaivt"].Value);
+                    }
+                }
+                if (loaiVT == 0) {
+                    MessageBox.Show("TÀI KHOẢN KHÔNG TỒN TẠI!!! HÃY THỬ LẠI");
+                }
+                else if (loaiVT == 1)
+                {
+                    QUANTRIVIEN qUANTRIVIEN = new QUANTRIVIEN(username, password);
+                    this.Hide();
+                    qUANTRIVIEN.ShowDialog();
+                    this.Close();
+                }
+                else if (loaiVT == 2)
+                {
+                    NHASI nHASI = new NHASI(username, password);
+                    this.Hide();
+                    nHASI.ShowDialog();
+                    this.Close();
+                }
+                else if (loaiVT == 3)
+                {
+                    NHANVIEN nHANVIEN = new NHANVIEN(username, password);
+                    this.Hide();
+                    nHANVIEN.ShowDialog();
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("TÀI KHOẢN ĐANG BỊ KHÓA !!!");
+            }
         }
     }
 }

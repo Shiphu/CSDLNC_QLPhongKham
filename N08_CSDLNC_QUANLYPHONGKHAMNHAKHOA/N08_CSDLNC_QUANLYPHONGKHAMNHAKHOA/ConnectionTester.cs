@@ -10,14 +10,14 @@ namespace WinFormsApp1
     public class ConnectionTester
     {
         public string[] connectionStrings = new string[]
-    {
-        "Data Source=SHIPHUDOTCPP;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True",
-        "Data Source=DESKTOP-U8VK4R9\\MSSQLSERVER2022;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=true;",
-        "Server=DESKTOP-OST9FTB;Database=CSDLNC_QLPhongKham;User Id=sa;Password=123;",
-        "Data Source=HUYNHPHUC;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True",
-        "Data Source=P1293;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True"
-        // Thêm các connectionString khác ở đây tương ứng với từng người dùng
-    };
+        {
+            "Data Source=SHIPHUDOTCPP;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True",
+            "Data Source=DESKTOP-U8VK4R9\\MSSQLSERVER2022;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=true;",
+            "Server=DESKTOP-OST9FTB;Database=CSDLNC_QLPhongKham;User Id=sa;Password=123;",
+            "Data Source=HUYNHPHUC;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True",
+            "Data Source=P1293;Initial Catalog=CSDLNC_QLPhongKham;Integrated Security=True"
+            // Thêm các connectionString khác ở đây tương ứng với từng người dùng
+        };
 
         public int TestConnectionsAndGetIndex()
         {
@@ -46,23 +46,32 @@ namespace WinFormsApp1
 
         private int TestSingleConnection(int index)
         {
-            SqlConnection connection = new SqlConnection(connectionStrings[index]);
-            try
+            string connectionString = connectionStrings[index];
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                connection.Open();
-                if (connection.State == System.Data.ConnectionState.Open)
+                try
                 {
-                    connection.Close();
-                    return index;
+                    connection.Open();
+                    if (connection.State == System.Data.ConnectionState.Open)
+                    {
+                        // Perform necessary operations here
+
+                        return index;
+                    }
                 }
-                else
+                catch (SqlException ex)
                 {
-                    connection.Close();
+                    // Log or handle the exception appropriately
+                    Console.WriteLine("SQL Exception: " + ex.Message);
                 }
-            }
-            catch (SqlException)
-            {
-                connection.Close();
+                finally
+                {
+                    if (connection.State != System.Data.ConnectionState.Closed)
+                    {
+                        connection.Close();
+                    }
+                }
             }
             return -1;
         }

@@ -47,6 +47,11 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text == "" || comboBox1.SelectedItem?.ToString() == "" || textBox2.Text == "" || dateTimePicker1.Value.ToString("yyyy-MM-dd") == "")
+            {
+                MessageBox.Show("Cần điền đầy đủ thông tin!!!");
+                return;
+            }
             string tenthuoc = textBox1.Text;
             string donvi = comboBox1.SelectedItem?.ToString(); // Sử dụng ?. để kiểm tra null
             string ccd = textBox2.Text;
@@ -71,6 +76,11 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
             {
                 MessageBox.Show(error.Message); // Hiển thị thông điệp trong MessageBox
             }
+        }
+
+        private void ThemThuoc_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
