@@ -603,7 +603,10 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
             else button_XuatHD.Enabled = false;
         }
 
-        
+        private void tb1_HSBN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

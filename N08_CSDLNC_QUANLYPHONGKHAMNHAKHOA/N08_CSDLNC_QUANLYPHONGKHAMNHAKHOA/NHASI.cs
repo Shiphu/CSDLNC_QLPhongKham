@@ -352,5 +352,20 @@ namespace N08_CSDLNC_QUANLYPHONGKHAMNHAKHOA
         {
 
         }
+
+        private void tab_KHDT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_TaoKHDT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb1_KHDT_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
